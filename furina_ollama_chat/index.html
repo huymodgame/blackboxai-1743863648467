@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furina Ollama Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('furina-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .chat-container {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    <div class="container mx-auto max-w-4xl p-4 h-screen flex flex-col">
+        <!-- Model Selection Screen -->
+        <div id="modelSelection" class="flex flex-col items-center justify-center h-full">
+            <h1 class="text-4xl font-bold mb-8">Furina AI Chat</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-md">
+                <button onclick="selectModel('gemma:2b')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-robot mr-2"></i> Gemma:2b
+                </button>
+                <button onclick="selectModel('llama3.2')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-brain mr-2"></i> Llama3.2
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Interface (hidden by default) -->
+        <div id="chatInterface" class="hidden h-full flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h2 id="currentModel" class="text-2xl font-bold"></h2>
+                <div class="flex space-x-2">
+                    <button id="newChatBtn" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">
+                        <i class="fas fa-plus mr-2"></i>New Chat
+                    </button>
+                    <button id="internetToggle" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">
+                        <i class="fas fa-wifi mr-2"></i>Internet: Off
+                    </button>
+                </div>
+            </div>
+
+            <div id="chatHistory" class="flex-1 overflow-y-auto mb-4 space-y-4 chat-container p-4 rounded-lg"></div>
+
+            <div class="flex items-center">
+                <input id="userInput" type="text" placeholder="Type your message..." class="flex-1 bg-gray-700 text-white px-4 py-3 rounded-l-lg focus:outline-none">
+                <button id="sendBtn" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-r-lg">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="register-sw.js"></script>
+    <script>
+        // Add link tag for manifest
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = '/manifest.json';
+        document.head.appendChild(link);
+        
+        // Add Furina character animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const furinaDiv = document.createElement('div');
+            furinaDiv.className = 'furina-animation';
+            document.body.appendChild(furinaDiv);
+        });
+    </script>
+</body>
+</html>
+
